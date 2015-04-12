@@ -11,11 +11,12 @@ fetch_historical_data <- function(peroid=60, days, ticker, type=c('d,c'))
   data$d<-as.character(data$d)
   for (i in 1:dim(data)[1]){
     if(grepl('[a-z]',data$d[i])){
-      date <- as.numeric(substr(as.character(data$d[i]),2,8))*1000
+      date <- as.numeric(substr(as.character(data$d[i]),2,nchar(as.character(data$d[i]))))
       data$d[i] <- date
-    }else{ date+ as.numeric(data$d[i])->data$d[i]}
+    }else{ date+ 60*as.numeric(data$d[i])->data$d[i]}
   }
   data$d<-as.numeric(data$d)  
+  data<-data[order(data$d),]
   }
   data
 }
