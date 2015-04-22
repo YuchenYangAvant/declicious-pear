@@ -30,13 +30,9 @@ fetch_historical_data <- function(peroid=60, days, ticker, type=c('d,o,h,l,c,v')
   new_data$real_flag<-0
   for (j in 1:dim(new_data)[1]){
     if(new_data$d[j] %in% data$d ==F){
-      for(k in 1:(j-1)){
-        if(new_data$d[j-k] %in% data$d){
-          new_data[j,-which(names(new_data) %in% c('d','real_flag'))] <-  data[,which(names(data) !='d')][which(data$d==new_data$d[j-k]),]
-          break
-        }
-      }
-    }else{
+      if(j==1){new_data[j,-which(names(new_data) %in% c('d','real_flag'))] <-  data[,which(names(data) !='d')][j,]}
+      else{new_data[j,-which(names(new_data) %in% c('d','real_flag'))] <-  new_data[,which(names(new_data) !='d')][(j-1),]}
+      }else{
     new_data[j,-which(names(new_data) %in% c('d','real_flag'))] <- data[,which(names(data) !='d')][which(data$d==new_data$d[j]),]
     new_data$real_flag[j]<-1
     }

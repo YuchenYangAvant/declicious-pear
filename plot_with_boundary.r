@@ -1,4 +1,4 @@
-plot_with_boundary <- function(data,target_name=c("ratio"),date_name='d',ma_period=100, n_sd=1){
+plot_with_boundary <- function(data,target_name=c("ratio"),date_name='d',ma_period=100, n_sd=1, display=1){
 
   if (!is.data.frame(data)) {
     stop("data must be a data frame")
@@ -19,6 +19,10 @@ plot_with_boundary <- function(data,target_name=c("ratio"),date_name='d',ma_peri
   
   data$plus_2std <- data$mean+data$std*1.65
   data$minus_2std <- data$mean-data$std*1.65
+  
+  ceiling(dim(data)[1]*(1-display))+1->start
+  dim(data)[1]->end
+  data<-data[start:end,]
   
   plot (x=data$date ,y=data[[target_name]], type='l')
   lines(x=data$date ,y=data$plus_std, type='l', col='red')
