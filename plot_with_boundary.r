@@ -24,6 +24,8 @@ plot_with_boundary <- function(data,target_name=c("ratio"),date_name='d',ma_peri
   dim(data)[1]->end
   data<-data[start:end,]
   
+  #gap.plot()
+  
   plot (x=data$date ,y=data[[target_name]], type='l')
   lines(x=data$date ,y=data$plus_std, type='l', col='red')
   lines(x=data$date ,y=data$plus_2std, type='l', col='red')
