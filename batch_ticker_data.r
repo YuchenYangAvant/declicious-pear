@@ -1,4 +1,4 @@
-batch_ticker_data <- function (days,dir = '~/Documents/trading/',type='update', stocklist='all_stock', upload=T)
+batch_ticker_data <- function (days,dir = '~/Documents/trading/',type='update', stocklist='all_stock', upload=F)
 {
   if(stocklist == 'all_stock'){
   stock_list<- read.csv(paste0(dir,'active_nyse_380_5d.csv'))
